@@ -4,9 +4,11 @@ __pycache__/
 *.pyc
 *.pyo
 .Python
+*.egg-info/
 
 # Environment variables (NEVER commit secrets!)
 .env
+.env.local
 
 # Data files (too heavy for git)
 data/
@@ -17,10 +19,21 @@ data/
 .idea/
 .DS_Store
 
+# Airflow
+logs/
+plugins/__pycache__/
+airflow.db
+airflow.cfg
+webserver_config.py
+standalone_admin_password.txt
+
 # dbt
 dbt/**/target/
 dbt/**/dbt_packages/
 dbt/**/logs/
+
+# Docker
+*.pid
 
 # OS
 Thumbs.db

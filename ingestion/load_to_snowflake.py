@@ -17,17 +17,24 @@ CSV_TO_TABLE = {
     "olist_order_reviews_dataset.csv": "ORDER_REVIEWS",
 }
 
-
 def get_connection():
-    """Établit une connexion à Snowflake en utilisant les variables d'environnement."""
-    return snowflake.connector.connect(
+    """Crée une connexion à Snowflake avec les credentials du .env"""
+    conn = snowflake.connector.connect(
         user=os.getenv("SNOWFLAKE_USER"),
         password=os.getenv("SNOWFLAKE_PASSWORD"),
         account=os.getenv("SNOWFLAKE_ACCOUNT"),
-        warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
-        database=os.getenv("SNOWFLAKE_DATABASE"),
-        schema=os.getenv("SNOWFLAKE_SCHEMA"),
+        warehouse="OLIST_WH",
+        database="OLIST_DB",
+        schema="RAW",
+        role="ACCOUNTADMIN",
     )
+    # Force le contexte — nécessaire pour write_pandas
+    cursor = conn.cursor()
+    cursor.execute("USE WAREHOUSE OLIST_WH")
+    cursor.execute("USE DATABASE OLIST_DB")
+    cursor.execute("USE SCHEMA RAW")
+    cursor.close()
+    return conn
 
 def load_csv(conn, csv_path: str, table_name: str):
     """Charge un fichier CSV dans une table Snowflake."""
