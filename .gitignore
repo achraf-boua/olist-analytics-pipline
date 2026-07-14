@@ -37,3 +37,7 @@ dbt/**/logs/
 
 # OS
 Thumbs.db
+
+# Other
+*.drawio
+tables.txt

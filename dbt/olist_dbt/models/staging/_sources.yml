@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    description: "Données brutes du dataset e-commerce Olist (marketplace brésilien), chargées via le script Python d'ingestion vers la couche bronze."
+    database: OLIST_DB
+    schema: RAW
+    tables:
+
+      - name: orders
+        description: "En-têtes de commandes : statut, dates de commande, d'expédition et de livraison."
+        columns:
+          - name: order_id
+            description: "Identifiant unique de la commande."
+          - name: customer_id
+            description: "Identifiant du client ayant passé la commande."
+
+      - name: customers
+        description: "Informations clients : identifiant unique, code postal, ville, état."
+        columns:
+          - name: customer_id
+            description: "Identifiant unique du client (varie par commande)."
+          - name: customer_unique_id
+            description: "Identifiant persistant du client à travers ses différentes commandes."
+
+      - name: order_items
+        description: "Lignes de commande détaillées : produit, vendeur, prix unitaire et frais de port par article."
+
+      - name: products
+        description: "Catalogue produits : catégorie, dimensions, poids, nombre de photos."
+
+      - name: sellers
+        description: "Informations sur les vendeurs : identifiant et localisation (code postal, ville, état)."
+
+      - name: order_payments
+        description: "Moyens de paiement utilisés par commande : type, valeur, nombre d'échéances."
+
+      - name: order_reviews
+        description: "Avis clients laissés après réception de la commande : note de 1 à 5, commentaires."

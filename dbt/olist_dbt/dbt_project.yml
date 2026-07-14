@@ -1,0 +1,30 @@
+# Nom du projet dbt — doit correspondre au profil dans ~/.dbt/profiles.yml
+name: 'olist_dbt'
+version: '1.0.0'
+config-version: 2
+
+# Profil de connexion utilisé (référence vers ~/.dbt/profiles.yml)
+profile: 'olist_dbt'
+
+# Chemins des différents types de fichiers du projet
+model-paths: ["models"]           # Là où vivent les modèles SQL
+analysis-paths: ["analyses"]      # Pour des analyses ad-hoc
+test-paths: ["tests"]             # Pour les tests SQL custom
+seed-paths: ["seeds"]             # Pour les fichiers CSV statiques
+macro-paths: ["macros"]           # Pour les macros Jinja réutilisables
+snapshot-paths: ["snapshots"]     # Pour les SCD Type 2
+
+# Dossiers à supprimer avec `dbt clean` (compilations et packages)
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configuration des matérialisations par dossier de modèles
+models:
+  olist_dbt:
+    staging:
+      +materialized: view         # Couche silver = vues légères
+      +schema: staging            # Atterrit dans le schéma STAGING
+    marts:
+      +materialized: table        # Couche gold = tables matérialisées
+      +schema: marts              # Atterrit dans le schéma MARTS
