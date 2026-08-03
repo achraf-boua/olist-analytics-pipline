@@ -18,10 +18,10 @@ with customers_source as (
 stg_customers as (
 
     select
-        customer_id, # Identifiant du client pour une commande
-        customer_unique_id, # Identifiant du client pour toute les commandes
+        customer_id, -- Identifiant du client pour une commande
+        customer_unique_id, -- Identifiant du client pour toute les commandes
         cast(customer_zip_code_prefix as string) as customer_zip_code,
-        customer_city,
+        initcap(customer_city) as customer_city,
         customer_state
     from customers_source
 
@@ -29,5 +29,3 @@ stg_customers as (
 
 -- Sortie finale du modèle
 select * from stg_customers
-
-

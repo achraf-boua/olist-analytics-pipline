@@ -14,21 +14,21 @@ with src_products as (
 
 stg_products as (
 
-#========================================================================================
-# les colonnes product_name_lenght, product_description_lenght et product_photos_qty,
-# peuvent être utilisés pour voir par exemple si une description plus courte ou plus 
-# longue a un impact sur les ventes.
-#========================================================================================
+--========================================================================================
+-- les colonnes product_name_lenght, product_description_lenght et product_photos_qty,
+-- peuvent être utilisés pour voir par exemple si une description plus courte ou plus 
+-- longue a un impact sur les ventes.
+--========================================================================================
     select
         product_id,
-        product_category_name as category_name,
+        initcap(product_category_name) as category_name,
         cast(product_name_lenght as integer) as product_name_lenght,
         cast(product_description_lenght as integer) as product_description_lenght,
         cast(product_photos_qty as integer) as product_photos_quantity,
-        product_weight_g,
-        product_length_cm,
-        product_height_cm,
-        product_width_cm
+        cast(product_weight_g as integer) as product_weight_g,
+        cast(product_length_cm as integer) as product_length_cm,
+        cast(product_height_cm as integer) as product_height_cm,
+        cast(product_width_cm as integer) as product_width_cm
 
     from src_products
 
