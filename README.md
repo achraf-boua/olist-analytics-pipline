@@ -92,8 +92,8 @@ GitHub Actions CI/CD (dbt test, SQL lint)
 ## Project Progress
 
 - [x] Week 1 — Project setup, Snowflake config, raw data ingestion (550K+ rows)
-- [ ] Week 2 — Airflow orchestration + dbt staging models
-- [ ] Week 3 — Star schema modeling (gold layer)
+- [x] Week 2 — Airflow orchestration + dbt staging models
+- [x] Week 3 — Star schema modeling (gold layer)
 - [ ] Week 4 — Data marts + Metabase dashboards
 - [ ] Week 5 — Power BI dashboards + CI/CD + documentation
 
